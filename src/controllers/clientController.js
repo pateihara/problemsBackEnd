@@ -2,12 +2,14 @@ import ClientSchema from "../models/clientSchema.js";
 
 //READ
 const getClientAll = (req, res) => {
-  ClientSchema.find(function (err, clients) {
-    if (err) {
-      res.status(500).send({ message: err.message });
-    }
-    res.status(200).send(clients);
-  });
+  ClientSchema.find()
+    .populate()
+    .exec(function (err, clients) {
+      if (err) {
+        res.status(500).send({ message: err.message });
+      }
+      res.status(200).send(clients);
+    });
 };
 
 //CREATE  -  criar novos usuários
